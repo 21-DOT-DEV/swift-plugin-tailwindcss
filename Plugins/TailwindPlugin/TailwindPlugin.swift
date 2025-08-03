@@ -1,8 +1,8 @@
 //
-//  TemplatePlugin.swift
-//  GigaBitcoin/template-plugin
+//  TailwindCSSPlugin.swift
+//  21-DOT-DEV/swift-plugin-tailwindcss
 //
-//  Copyright (c) 2023 GigaBitcoin LLC
+//  Copyright (c) 2025 21.dev
 //  Distributed under the MIT software license
 //
 //  See the accompanying file LICENSE for information
@@ -12,12 +12,12 @@ import Foundation
 import PackagePlugin
 
 @main
-struct TemplatePlugin: CommandPlugin {
+struct TailwindCSSPlugin: CommandPlugin {
     func performCommand(
         context: PackagePlugin.PluginContext,
         arguments: [String]
     ) async throws {
-        let binary = try context.tool(named: "template")
+        let binary = try context.tool(named: "tailwindcss")
         let process = Process()
 
         process.executableURL = URL(filePath: binary.path.string)
@@ -26,12 +26,12 @@ struct TemplatePlugin: CommandPlugin {
         try process.run()
         process.waitUntilExit()
 
-        // Check whether the `template` invocation was successful.
+        // Check whether the `tailwindcss` invocation was successful.
         guard process.terminationReason == .exit && process.terminationStatus == 0 else {
             Diagnostics.error("""
-                'template' invocation failed with a nonzero exit code: '\(process.terminationStatus)'.
+                'tailwindcss' invocation failed with a nonzero exit code: '\(process.terminationStatus)'.
 
-                See 'swift package plugin template --help' for details.
+                See 'swift package plugin tailwindcss --help' for details.
                 """
             )
 

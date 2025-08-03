@@ -3,32 +3,36 @@
 import PackageDescription
 
 let package = Package(
-    name: "template",
+    name: "swift-plugin-tailwindcss",
     products: [
-        .plugin(
-            name: "template",
-            targets: [
-                "TemplatePlugin"
-            ]
-        )
+        .executable(name: "tailwindcss", targets: ["TailwindExecutable"]),
+        .plugin(name: "TailwindPlugin", targets: ["TailwindPlugin"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/21-DOT-DEV/swift-artifact-parser", exact: "0.0.1")
+    ],
     targets: [
+        .executableTarget(
+            name: "TailwindExecutable",
+            dependencies: [
+                .product(name: "ArtifactParser", package: "swift-artifact-parser")
+            ]
+        ),
         .plugin(
-            name: "TemplatePlugin",
+            name: "TailwindPlugin",
             capability: .command(
                 intent: .custom(
-                    verb: "template",
-                    description: "Execute commands defined by template."
+                    verb: "tailwindcss",
+                    description: "Run TailwindCSS CLI commands."
                 )
             ),
-            dependencies: ["template"]
+            dependencies: ["tailwindcss"]
         ),
-//        .binaryTarget(name: "template", path: "template.artifactbundle.zip"),
+//        .binaryTarget(name: "tailwindcss", path: "tailwindcss.artifactbundle.zip"),
         .binaryTarget(
-            name: "template",
-            url: "https://github.com/GigaBitcoin/template-plugin/releases/download/0.0.1/template.artifactbundle.zip",
-            checksum: "42e1e7a4f7d7586ec6d13b3e03cce5612ac237244cc3cb1e6de7c49416d04520"
+            name: "tailwindcss",
+            url: "https://github.com/21-DOT-DEV/swift-plugin-tailwindcss/releases/download/1.0.00/tailwindcss.artifactbundle.zip",
+            checksum: "0fb225345a0c2a182b187f4b58d48d81f6d576e79020514046721e317fdaf74a"
         ),
     ],
     swiftLanguageVersions: [.v5]

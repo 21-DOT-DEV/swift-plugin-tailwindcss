@@ -1,20 +1,20 @@
 name: Check GitHub Release
 
 on: 
-  # schedule: 
-  #   Daily at 8:20 UTC and 20:20 UTC
-  #   - cron: '20 8,20 * * *'
-  # # Enables manually running this workflow from the Actions tab
-  # workflow_dispatch:
+  schedule: 
+    Daily at 8:20 UTC and 20:20 UTC
+    - cron: '20 8,20 * * *'
+  # Enables manually running this workflow from the Actions tab
+  workflow_dispatch:
 
 jobs:
   check:
     name: Check GitHub Release
     runs-on: ubuntu-latest
     env:
-      BINARY_NAME: lefthook
-      BINARY_REPO: evilmartians/lefthook
-      PLUGIN_REPO: 21-DOT-DEV/swift-plugin-template
+      BINARY_NAME: tailwindcss
+      BINARY_REPO: tailwindlabs/tailwindcss
+      PLUGIN_REPO: 21-DOT-DEV/swift-plugin-tailwindcss
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SEMANTIC_VERSIONING_REGEX: (v?[0-9]+\.[0-9]+\.[0-9]+)
     outputs:

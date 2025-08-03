@@ -1,36 +1,36 @@
 name: Publish Artifact Bundle
 
 on:
-  # workflow_call:
-  #   inputs:
-  #     binary_name:
-  #       required: true
-  #       type: string
-  #     binary_repo:
-  #       required: true
-  #       type: string
-  #     binary_version:
-  #       required: true
-  #       type: string
-  #     plugin_repo:
-  #       required: true
-  #       type: string
+  workflow_call:
+    inputs:
+      binary_name:
+        required: true
+        type: string
+      binary_repo:
+        required: true
+        type: string
+      binary_version:
+        required: true
+        type: string
+      plugin_repo:
+        required: true
+        type: string
 
-  # # Enables manually running this workflow from the Actions tab
-  # workflow_dispatch:
-  #   inputs:
-  #     binary_name:
-  #       required: true
-  #       type: string
-  #     binary_repo:
-  #       required: true
-  #       type: string
-  #     binary_version:
-  #       required: true
-  #       type: string
-  #     plugin_repo:
-  #       required: true
-  #       type: string
+  # Enables manually running this workflow from the Actions tab
+  workflow_dispatch:
+    inputs:
+      binary_name:
+        required: true
+        type: string
+      binary_repo:
+        required: true
+        type: string
+      binary_version:
+        required: true
+        type: string
+      plugin_repo:
+        required: true
+        type: string
 
 jobs:
   publish:
@@ -47,15 +47,10 @@ jobs:
       run: |
           gh release download ${{ inputs.binary_version }} \
                             -R "${{ inputs.binary_repo }}" \
-                            -p '*MacOS*64' \
-                            -p '*Linux*64' \
-                            -p '*Windows*64.exe' \
-                            -p '*.deb' \
-                            -p '*.rpm' \
+                            -p 'tailwindcss-macos-*' \
+                            -p 'tailwindcss-linux-*' \
+                            -p 'tailwindcss-windows-*.exe' \
                             -D '${{ inputs.binary_name }}/Resources/template.artifactbundle'
-    - name: Unzip Tuist
-      run: |
-          7z x "${{ inputs.binary_name }}/Resources/tuist.zip" -o"${{ inputs.binary_name }}/Resources/template.artifactbundle"
     - name: Update GitHub Env Vars
       run: |
           # The example binary includes a leading 'v' in the release version number. We drop it on the next line.
@@ -70,8 +65,10 @@ jobs:
     - name: Add executable permissions
       run: |
           # The example binaries for MacOS need the executable permission added.
-          chmod +x "${{ env.ARTIFACT_PATH }}/${{ inputs.binary_name }}_${{ env.PLUGIN_VERSION }}_MacOS_arm64"
-          chmod +x "${{ env.ARTIFACT_PATH }}/${{ inputs.binary_name }}_${{ env.PLUGIN_VERSION }}_MacOS_x86_64"
+          chmod +x "${{ env.ARTIFACT_PATH }}/${{ inputs.binary_name }}-macos-arm64"
+          chmod +x "${{ env.ARTIFACT_PATH }}/${{ inputs.binary_name }}-macos-x64"
+          chmod +x "${{ env.ARTIFACT_PATH }}/${{ inputs.binary_name }}-linux-arm64"
+          chmod +x "${{ env.ARTIFACT_PATH }}/${{ inputs.binary_name }}-linux-x64"
     - name: Zip Artifact Bundle
       run: |
           (cd "${{ env.ARTIFACT_PATH }}" && 7z a -tzip -mx=9 "${{ env.ARTIFACT_NAME }}" *)
