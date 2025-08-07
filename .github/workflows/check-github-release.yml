@@ -22,6 +22,7 @@ jobs:
       BINARY_REPO: ${{ env.BINARY_REPO }}
       BINARY_VERSION: ${{ steps.two.outputs.BINARY_VERSION }}
       PLUGIN_VERSION: ${{ steps.one.outputs.PLUGIN_VERSION }}
+      TRIMMED_BINARY_VERSION: ${{ steps.three.outputs.TRIMMED_BINARY_VERSION }}
     steps:
       - name: Get current plugin version
         id: one
