@@ -31,8 +31,8 @@ let package = Package(
 //        .binaryTarget(name: "tailwindcss", path: "tailwindcss.artifactbundle.zip"),
         .binaryTarget(
             name: "tailwindcss",
-            url: "https://github.com/21-DOT-DEV/swift-plugin-tailwindcss/releases/download/4.1.11/tailwindcss.artifactbundle.zip",
-            checksum: "f35cc4636766caef7108454ac6db1078e60b6fde435e841097bc15b1662af1ba"
+            url: "https://github.com/21-DOT-DEV/swift-plugin-tailwindcss/releases/download/4.1.12/tailwindcss.artifactbundle.zip",
+            checksum: "5809ef833fedad878434f6e97284e7ba808d21beea309d7670fc18fdae6cb721"
         ),
     ],
     swiftLanguageVersions: [.v5]
