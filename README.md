@@ -22,7 +22,7 @@ import PackageDescription
 let package = Package(
     name: "YourPackageName",
     dependencies: [
-        .package(url: "https://github.com/21-DOT-DEV/swift-plugin-tailwindcss.git", exact: "4.1.16"),
+        .package(url: "https://github.com/21-DOT-DEV/swift-plugin-tailwindcss.git", exact: "4.1.17"),
     ],
     targets: [
         .executableTarget(name: "YourTargetName")
