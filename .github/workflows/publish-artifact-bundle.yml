@@ -47,9 +47,11 @@ jobs:
       run: |
           gh release download ${{ inputs.binary_version }} \
                             -R "${{ inputs.binary_repo }}" \
-                            -p 'tailwindcss-macos-*' \
-                            -p 'tailwindcss-linux-*' \
-                            -p 'tailwindcss-windows-*.exe' \
+                            -p '${{ inputs.binary_name }}-macos-arm64' \
+                            -p '${{ inputs.binary_name }}-macos-x64' \
+                            -p '${{ inputs.binary_name }}-linux-arm64' \
+                            -p '${{ inputs.binary_name }}-linux-x64' \
+                            -p '${{ inputs.binary_name }}-windows-x64.exe' \
                             -D '${{ inputs.binary_name }}/Resources/template.artifactbundle'
     - name: Update GitHub Env Vars
       run: |
